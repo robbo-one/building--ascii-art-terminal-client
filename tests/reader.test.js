@@ -11,6 +11,7 @@ test('wecome message', (t) => {
 test('list files in dir', (t) => {
   reader.dataFiles(__dirname + '/data', function(files) {
     t.equal(files.length, 2, "reads correct number of files")
+    t.equal(files[0], "another-test.txt", "reads file names")
     t.end()
   })
 })
