@@ -19,7 +19,7 @@ By now you should be getting used to setting up Node programs. Here's a reminder
 1. Clone this repo and create a new branch for you and your pair.
 2. Make sure you're logged in as the correct user, and that your `user.name` and `user.email` are you and not someone else!
 2. Create an npm `package.json` file using `npm init`.
-3. Install Nodemon, tape, and tap-diff.
+3. Install tape, and tap-diff.
   - Should these be `--save` or `--save-dev`?
 4. Write a couple of scripts in your `package.json`:
   - one that starts the program
