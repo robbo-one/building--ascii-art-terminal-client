@@ -1,0 +1,26 @@
+{
+  "name": "ascii-art-reader",
+  "version": "1.0.0",
+  "description": "Build a state of the (ASCII) art terminal client. Don't forget to maximise your terminal window on one screen... you'll need the space!",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  },
+  "scripts": {
+    "test": "tape tests/**/*.js | tap-spec",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hihi-2017/ascii-art-reader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hihi-2017/ascii-art-reader/issues"
+  },
+  "homepage": "https://github.com/hihi-2017/ascii-art-reader#readme"
+}
