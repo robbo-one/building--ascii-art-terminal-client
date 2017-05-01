@@ -8,3 +8,10 @@ test('list files in dir', (t) => {
     t.end()
   })
 })
+
+test('readArt', (t) => {
+  reader.readArt(__dirname + '/data/another-test.txt', (txt) => {
+    t.equal(txt, "test data\n", 'sends back the file data')
+    t.end()
+  })
+})
