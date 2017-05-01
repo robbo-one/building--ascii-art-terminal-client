@@ -15,9 +15,9 @@ test('file prompt', (t) => {
   })
 })
 
-test('enter any key', (t) => {
-  presenter.enterAnyKey((msg) => {
-    t.equal(msg, "Enter any key to continue.", 'returns correct message')
+test('select art', (t) => {
+  presenter.selectArt((msg) => {
+    t.equal(msg, "Enter the number of the art to dsiplay (q to exit)", 'returns correct message')
     t.end()
   })
 })
