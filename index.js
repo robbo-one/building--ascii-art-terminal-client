@@ -1,4 +1,12 @@
 var reader = require('./lib/reader')
+var presenter = require('./lib/presenter')
 
-reader.start(console.log, __dirname + '/data')
+
+presenter.welcome(console.log)
+
+reader.dataFiles(__dirname + '/data', (files) => {
+  presenter.filePrompt(files, console.log)
+  console.log()
+  presenter.enterAnyKey(console.log)
+})
 
