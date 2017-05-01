@@ -28,6 +28,10 @@ test('prints art if valid art is chosen', (t) => {
     printArt: (txt, printer) => {
       t.equal(txt, 'fake text from file', 'print art is passed the correct art')
       t.equal(printer, 'fake printer', 'printer is passed in from params')
+    },
+    selectArt: () => {
+    },
+    filePrompt: () => {
     }
   }
   var fakeReader = {
@@ -40,6 +44,7 @@ test('prints art if valid art is chosen', (t) => {
     presenter: fakePresenter,
     reader: fakeReader,
     printer: 'fake printer',
-    files: ['a']
+    files: ['a'],
+    fullFiles: ['a']
   })
 })
