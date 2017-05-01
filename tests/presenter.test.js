@@ -21,3 +21,10 @@ test('select art', (t) => {
     t.end()
   })
 })
+
+test('print art', (t) => {
+  presenter.printArt('test', (txt) => {
+    t.equal(txt, 'test', 'print art just prints the passed txt')
+    t.end()
+  })
+})
