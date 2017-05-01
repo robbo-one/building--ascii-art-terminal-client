@@ -8,5 +8,16 @@ test('q closes parser', (t) => {
       t.end()
     }
   }
-  parser.parseInput('q', fakeRL)
+  parser.parseInput('q', {rl: fakeRL})
+})
+
+test('prompts if input is invalid', (t) => {
+  t.plan(2)
+  var fakePresenter = {
+    invalidInput: () => {
+      t.pass('invalid input called')
+    }
+  }
+  parser.parseInput('0', {presenter: fakePresenter, files: ['a', 'b']})  
+  parser.parseInput('7', {presenter: fakePresenter, files: ['a', 'b']})  
 })

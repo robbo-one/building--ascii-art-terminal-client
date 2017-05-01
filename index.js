@@ -18,5 +18,5 @@ var rl = readline.createInterface({
 })
 
 rl.on('line', (line) => {
-  parser.parseInput(line, rl)
+  parser.parseInput({line, rl, presenter})
 })            
