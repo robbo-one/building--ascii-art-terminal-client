@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 console.log('Welcome to ASCII Art Reader!')
-
+console.log('Here are the available files:')
 fs.readdir('data', listFiles)
 
 function listFiles (err, files) {
@@ -9,10 +9,14 @@ function listFiles (err, files) {
     console.log('Sorry, could not read from the data directory.')
     return
   }
-  console.log('Here are the available files:')
   files.forEach(showListItem)
 }
 
 function showListItem (item) {
   console.log(` - ${item}`)
+}
+
+module.exports = {
+  listFiles,
+  showListItem
 }
