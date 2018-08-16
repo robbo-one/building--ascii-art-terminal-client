@@ -1,8 +1,15 @@
 const STORE = {}
 
+// Set the `currentItem` property to track which item we're viewing/commenting
+// on. This will hold a number which corresponds to a property key on the store
+// object.
+function setCurrentItem (itemKey, store = STORE) {
+  store.currentItem = itemKey
+}
+
 // Store a file list as an object (effectively, a _hashmap_)
 function setList (files, store = STORE) {
-  files.forEach((f, i) => store[i] = f)
+  files.forEach((f, i) => { store[i] = f })
 }
 
 // Get a single filename by index
@@ -22,5 +29,6 @@ function getList (store = STORE) {
 module.exports = {
   getItem,
   getList,
+  setCurrentItem,
   setList
 }

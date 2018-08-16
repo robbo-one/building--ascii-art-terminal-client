@@ -1,4 +1,4 @@
-const { getItem, getList, setList } = require('../store')
+const { getItem, getList, setCurrentItem, setList } = require('../store')
 
 let testStore = null
 
@@ -33,7 +33,7 @@ test("getItem throws if the item doesn't exist", () => {
   expect(() => getItem(9, testStore)).toThrow()
 })
 
-// A hash table or hash map is a rather old term for an efficient way of
+// A hash table or (hash map) is a rather old term for an efficient way of
 // storing key/value pairs. JavaScript objects are a high-level hash table, so
 // we have one already with zero effort on our part. All we're really testing
 // in the function below is that the array of filenames got properly converted
@@ -54,5 +54,14 @@ test('setList creates a hashmap', () => {
     'aardvark.txt'
   ]
   setList(files, testStore)
+  expect(testStore).toEqual(expected)
+})
+
+test('setCurrentItem creates the currentItem property', () => {
+  const expected = {
+    ...testStore,
+    currentItem: 1
+  }
+  setCurrentItem(1, testStore)
   expect(testStore).toEqual(expected)
 })
