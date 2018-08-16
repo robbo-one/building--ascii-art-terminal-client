@@ -18,18 +18,21 @@ function input (context, next) {
       terminal: false
     })
   }
-  context.io.question('Choice: ', choice => handleInput(choice, context, next))
+  context.io.question("Choice (or 'q' to quit): ",
+    choice => handleInput(choice, context, next))
 }
 
 function handleInput (choice, context, next) {
   // First of all, quit on `q`!
   if (choice === 'q') {
-    quit()
+    quit(context)
   }
+
+  const n = Number.parseInt(choice, 10)
 
   // People try to input some funny things sometimes. Let's reject anything
   // that isn't a number. This is a crude form of _input_validation_.
-  if (Number.isNaN(choice, 10)) {
+  if (Number.isNaN(n)) {
     // We won't throw an error here: it's not a programmer problem, just a user
     // error. We use the `return` keyword to ensure the rest of this function
     // doesn't continue to execute.
@@ -38,11 +41,11 @@ function handleInput (choice, context, next) {
 
   // What if they input a choice that's a valid number, but doesn't correspond
   // to one of our picture files?
-  if (choice < 0 || choice >= context.files.length) {
+  if (!context.files.hasOwnProperty(choice)) {
     return next(reset(context))
   }
 
-  context.currentPic = choice
+  context.currentPic = n
   next(context)
 }
 
