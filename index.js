@@ -7,12 +7,12 @@
 
 const display = require('./display')
 const files = require('./files')
+const quit = require('./quit')
 
 // This is an IIFE (Immediately Invoked Function Expression). It's basically a
 // function that "calls itself"! You can read more about them here:
 // https://medium.com/@vvkchandra/essential-javascript-mastering-immediately-invoked-function-expressions-67791338ddc6
 ;(function asciiArtReader () {
-  let actionIndex = 0
   let context = {}
 
   // Read out loud, this also provides us with a nice description of what
@@ -26,18 +26,17 @@ const files = require('./files')
     display.showFile
   ]
 
+  let actionIndex = 0
+
   // Call the next function in the actions list, passing it a context object.
   // Things to notice:
   //   * you might think of `ctx` as similar to Express' `req` object
   function next (ctx) {
-    // Passing an empty object resets to the beginning
-    if (isEmpty(ctx)) {
+    // Reset to the beginning if:
+    //   * the context object is empty, or
+    //   * there's no more work to do in the actions list
+    if (isEmpty(ctx) || actionIndex === actions.length) {
       actionIndex = 0
-    }
-
-    // Exit if there's no more work to do
-    if (actionIndex === actions.length) {
-      return
     }
 
     // Get the next function to call from the list above
