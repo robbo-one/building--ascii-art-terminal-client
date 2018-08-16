@@ -29,7 +29,7 @@ function handleInput (rl, choice, next, reset) {
 
   // What if they input a choice that's a valid number, but doesn't correspond
   // to one of our picture files?
-  if (choice < 0 || store.getList().length) {
+  if (choice < 0 || choice >= store.getList().length) {
     return reset()
   }
 
@@ -37,7 +37,14 @@ function handleInput (rl, choice, next, reset) {
   next()
 }
 
+function showFile (next) {
+  console.log(store.getBuffer().toString('utf8'))
+  next()
+}
+
 module.exports = {
   choices,
-  input
+  handleInput,
+  input,
+  showFile
 }

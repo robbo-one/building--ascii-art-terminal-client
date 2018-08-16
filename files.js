@@ -12,6 +12,19 @@ function loadDirectory (next) {
   fs.readdir('./data', (err, files) => handleFileList(err, files, next))
 }
 
+function loadFile (next) {
+  fs.readFile(`./data/${store.getCurrentItem()}`, (err, file) => handleFile(err, file, next))
+}
+
+function handleFile (err, file, next) {
+  if (err) {
+    console.log(err)
+    throw Error('Sorry, could not load your file.')
+  }
+  store.setBuffer(file)
+  next()
+}
+
 function handleFileList (err, files, next) {
   if (err) {
     throw Error('Sorry, could not read from the data directory.')
@@ -21,6 +34,8 @@ function handleFileList (err, files, next) {
 }
 
 module.exports = {
-  handleFileList, // I'm only exporting this so it can be tested
-  loadDirectory
+  handleFile,
+  handleFileList,
+  loadDirectory,
+  loadFile
 }

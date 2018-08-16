@@ -21,7 +21,9 @@ const store = require('./store')
   const actions = [
     files.loadDirectory,
     display.choices,
-    display.input
+    display.input,
+    files.loadFile,
+    display.showFile
   ]
 
   function next () {
@@ -47,6 +49,11 @@ const store = require('./store')
     next()
   }
 
-  // Get this party started
-  next()
+  try {
+    // Get this party started
+    next()
+  } catch (err) {
+    console.log(err.message)
+    reset()
+  }
 }())

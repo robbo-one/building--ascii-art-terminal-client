@@ -1,6 +1,6 @@
 const readline = require('readline')
 
-const STORE = {}
+const STORE = { items: {} }
 
 // Set the `currentItem` property to track which item we're viewing/commenting
 // on. This will hold a number which corresponds to a property key on the store
@@ -30,30 +30,42 @@ function closeIOInterface (store = STORE) {
   store.io.close()
 }
 
+// Store a file buffer after it's read
+function setBuffer (buf, store = STORE) {
+  store.buf = buf
+}
+
+// Get the buffer for display
+function getBuffer (store = STORE) {
+  return store.buf
+}
+
 // Store a file list as an object (effectively, a _hashmap_)
 function setList (files, store = STORE) {
-  files.forEach((f, i) => { store[i] = f })
+  // Make sure we don't have any old items hanging around
+  store.items = {}
+
+  // Each file becomes a property on store.items
+  files.forEach((f, i) => { store.items[i] = f })
 }
 
 // Get a single filename by index
-function getItem (index, store = STORE) {
-  if (!store.hasOwnProperty(index)) {
-    throw new Error("Sorry, that option doesn't exist.")
-  }
-
-  return { [index]: store[index] }
+function getCurrentItem (store = STORE) {
+  return store.items[store.currentItem]
 }
 
 // Get a formatted list of files with associated keys
 function getList (store = STORE) {
-  return Object.keys(store).map(k => `${k}. ${store[k]}`)
+  return Object.keys(store.items).map(k => `${k}. ${store.items[k]}`)
 }
 
 module.exports = {
   closeIOInterface,
+  getBuffer,
+  getCurrentItem,
   getIOInterface,
-  getItem,
   getList,
+  setBuffer,
   setCurrentItem,
   setList
 }
