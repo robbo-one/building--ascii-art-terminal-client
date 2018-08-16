@@ -1,4 +1,5 @@
 const store = require('./store')
+const quit = require('./quit')
 
 function choices (next) {
   const list = store.getList()
@@ -12,6 +13,11 @@ function input (next, reset) {
 }
 
 function handleInput (rl, choice, next, reset) {
+  // First of all, quit on `q`!
+  if (choice === 'q') {
+    quit()
+  }
+
   // People try to input some funny things sometimes. Let's reject anything
   // that isn't a number. This is a crude form of _input_validation_.
   if (Number.isNaN(choice, 10)) {

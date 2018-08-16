@@ -16,10 +16,18 @@ function getIOInterface (readLineInterface, store = STORE) {
     store.io = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
+
+      // This stops readline from echoing the character entered, keeping our
+      // display a bit cleaner
       terminal: false
     })
   }
   return store.io
+}
+
+// Tidy up the interface
+function closeIOInterface (store = STORE) {
+  store.io.close()
 }
 
 // Store a file list as an object (effectively, a _hashmap_)
@@ -42,6 +50,7 @@ function getList (store = STORE) {
 }
 
 module.exports = {
+  closeIOInterface,
   getIOInterface,
   getItem,
   getList,
