@@ -1,5 +1,3 @@
-const readline = require('readline')
-
 const store = require('./store')
 
 function choices (next) {
@@ -9,14 +7,11 @@ function choices (next) {
 }
 
 function input (next, reset) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  })
-  rl.question('Choice: ', choice => handleInput(choice, next, reset))
+  const rl = store.getIOInterface()
+  rl.question('Choice: ', choice => handleInput(rl, choice, next, reset))
 }
 
-function handleInput (choice, next, reset) {
+function handleInput (rl, choice, next, reset) {
   // People try to input some funny things sometimes. Let's reject anything
   // that isn't a number. This is a crude form of _input_validation_.
   if (Number.isNaN(choice, 10)) {

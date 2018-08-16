@@ -1,3 +1,5 @@
+const readline = require('readline')
+
 const STORE = {}
 
 // Set the `currentItem` property to track which item we're viewing/commenting
@@ -5,6 +7,19 @@ const STORE = {}
 // object.
 function setCurrentItem (itemKey, store = STORE) {
   store.currentItem = itemKey
+}
+
+// Keep one copy of the readLine interface so we don't have to keep creating
+// and closing it.
+function getIOInterface (readLineInterface, store = STORE) {
+  if (!store.io) {
+    store.io = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: false
+    })
+  }
+  return store.io
 }
 
 // Store a file list as an object (effectively, a _hashmap_)
@@ -27,6 +42,7 @@ function getList (store = STORE) {
 }
 
 module.exports = {
+  getIOInterface,
   getItem,
   getList,
   setCurrentItem,
