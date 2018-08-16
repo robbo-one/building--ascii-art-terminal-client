@@ -1,9 +1,7 @@
-const store = require('./store')
-
 // Quit nicely
-module.exports = function quit () {
+module.exports = function quit (context) {
   // Tidy up our readline interface
-  store.closeIOInterface()
+  context.io.close()
 
   // I'm out
   process.exit(0)
