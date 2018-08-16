@@ -29,8 +29,13 @@ function handleFileList (err, files, next) {
   if (err) {
     throw Error('Sorry, could not read from the data directory.')
   }
-  store.setList(files)
+  store.setList(files.filter(textFilesOnly))
   next()
+}
+
+// This helps us ignore directory names, hidden files etc
+function textFilesOnly (filename) {
+  return filename.endsWith('.txt')
 }
 
 module.exports = {
