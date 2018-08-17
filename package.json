@@ -1,0 +1,15 @@
+{
+  "name": "ascii-art-reader",
+  "version": "0.1.0",
+  "description": "Callback hell!",
+  "main": "index.js",
+  "repository": "git@github.com:dev-academy-challenges/ascii-art-reader",
+  "author": "EDA",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  },
+  "scripts": {
+    "start": "nodemon --ignore data/ index"
+  }
+}
