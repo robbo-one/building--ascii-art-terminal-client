@@ -32,12 +32,12 @@ const input = require('./input')
 
   // Call the next function in the actions list, passing it a context object.
   // Things to notice:
-  //   * you might think of `ctx` as similar to Express' `req` object
-  function next (ctx) {
+  //   * you might think of `context` as similar to Express' `req` object
+  function next (context) {
     // Reset to the beginning if:
     //   * the context object is empty, or
     //   * there's no more work to do in the actions list
-    if (isEmpty(ctx) || actionIndex === actions.length) {
+    if (isEmpty(context) || actionIndex === actions.length) {
       actionIndex = 0
     }
 
@@ -49,7 +49,7 @@ const input = require('./input')
 
     // Call the function, passing it our `context` object so it can store
     // values, and `next` so it can trigger the next action when it's done.
-    action(ctx, next)
+    action(context, next)
   }
 
   // Get this party started
