@@ -55,13 +55,8 @@ const quit = require('./quit')
     action(ctx, next)
   }
 
-  try {
-    // Get this party started
-    next(context)
-  } catch (err) {
-    console.log('I caught this:', err.message)
-    quit(context)
-  }
+  // Get this party started
+  next(context)
 }())
 
 // Is our context empty, or at most has a readline interface on it?
