@@ -20,7 +20,7 @@ const input = require('./input')
     files.loadDirectory,
     display.choices,
     input.choose,
-    files.loadFile,
+    files.loadPicFile,
     files.loadComments,
     display.showFile,
     display.showComments,
