@@ -21,9 +21,13 @@ const quit = require('./quit')
   const actions = [
     files.loadDirectory,
     display.choices,
-    display.input,
+    display.choose,
     files.loadFile,
-    display.showFile
+    files.loadComments,
+    display.showFile,
+    display.showComments,
+    display.comment,
+    files.saveComment
   ]
 
   let actionIndex = 0

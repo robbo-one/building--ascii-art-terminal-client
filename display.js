@@ -3,11 +3,15 @@ const readline = require('readline')
 const quit = require('./quit')
 
 function choices (context, next) {
-  console.log(context.files)
+  console.log('\nAvailable ASCII Art')
+  console.log('===================')
+  Object.keys(context.files).forEach(k =>
+    console.log(` ${k}. ${context.files[k]}`))
   next(context)
 }
 
-function input (context, next) {
+function choose (context, next) {
+  // We only do this part the first time around
   if (!context.io) {
     context.io = readline.createInterface({
       input: process.stdin,
@@ -18,11 +22,27 @@ function input (context, next) {
       terminal: false
     })
   }
+
   context.io.question("Choice (or 'q' to quit): ",
-    choice => handleInput(choice, context, next))
+    choice => handleChoice(choice, context, next))
 }
 
-function handleInput (choice, context, next) {
+function comment (context, next) {
+  console.log('Enter a comment (or <Enter> to go back to menu)')
+  context.io.question(': ', choice => handleComment(choice, context, next))
+}
+
+function handleComment (choice, context, next) {
+  // User hit enter
+  if (choice === '') {
+    return next(reset(context))
+  }
+
+  context.comment = choice
+  next(context)
+}
+
+function handleChoice (choice, context, next) {
   // First of all, quit on `q`!
   if (choice === 'q') {
     quit(context)
@@ -62,14 +82,25 @@ function reset (context) {
 }
 
 function showFile (context, next) {
-  console.log(context.buf.toString('utf8'))
+  console.log(`\n${context.buf.toString('utf8')}`)
+  next(context)
+}
+
+function showComments (context, next) {
+  if (context.commentsBuf) {
+    console.log('Comments:')
+    console.log(context.commentsBuf.toString('utf8'))
+  }
   next(context)
 }
 
 module.exports = {
   choices,
-  handleInput,
-  input,
+  choose,
+  comment,
+  handleComment,
+  handleChoice,
   reset,
+  showComments,
   showFile
 }
