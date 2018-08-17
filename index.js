@@ -1,4 +1,8 @@
-// complex-solution-bare (no comments!)
+// 'Complex' solution to ascii-art-reader.
+//
+// See complex-solution-comments branch for a heavy-on-the-comments version
+// explaining some things. Try reading this one first though, see if it makes
+// sense to you.
 
 const display = require('./display')
 const files = require('./files')
