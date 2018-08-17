@@ -7,6 +7,7 @@
 
 const display = require('./display')
 const files = require('./files')
+const input = require('./input')
 const quit = require('./quit')
 
 // This is an IIFE (Immediately Invoked Function Expression). It's basically a
@@ -21,12 +22,12 @@ const quit = require('./quit')
   const actions = [
     files.loadDirectory,
     display.choices,
-    display.choose,
+    input.choose,
     files.loadFile,
     files.loadComments,
     display.showFile,
     display.showComments,
-    display.comment,
+    input.comment,
     files.saveComment
   ]
 
