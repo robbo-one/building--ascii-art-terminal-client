@@ -8,14 +8,11 @@
 const display = require('./display')
 const files = require('./files')
 const input = require('./input')
-const quit = require('./quit')
 
 // This is an IIFE (Immediately Invoked Function Expression). It's basically a
 // function that "calls itself"! You can read more about them here:
 // https://medium.com/@vvkchandra/essential-javascript-mastering-immediately-invoked-function-expressions-67791338ddc6
 ;(function asciiArtReader () {
-  let context = {}
-
   // Read out loud, this also provides us with a nice description of what
   // happens when a user runs our program. Things to notice:
   //   * each element in the array is actually a function
@@ -56,7 +53,7 @@ const quit = require('./quit')
   }
 
   // Get this party started
-  next(context)
+  next({})
 }())
 
 // Is our context empty, or at most has a readline interface on it?

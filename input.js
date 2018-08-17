@@ -1,7 +1,5 @@
 const readline = require('readline')
 
-const quit = require('./quit')
-
 function choose (context, next) {
   // We only do this part the first time around
   if (!context.io) {
@@ -37,7 +35,8 @@ function handleComment (choice, context, next) {
 function handleChoice (choice, context, next) {
   // First of all, quit on `q`!
   if (choice === 'q') {
-    quit(context)
+    context.io.close()
+    process.exit(0)
   }
 
   const n = Number.parseInt(choice, 10)
@@ -57,7 +56,7 @@ function handleChoice (choice, context, next) {
     return next(reset(context))
   }
 
-  context.currentPic = n
+  context.currentPic = choice
   next(context)
 }
 

@@ -1,4 +1,4 @@
-const { handleChoice, handleComment, reset } = require('./input')
+const { handleChoice, handleComment, reset } = require('../input')
 
 let context, next
 
@@ -36,7 +36,7 @@ test("handleChoice resets when given a choice that isn't a number", () => {
 
 test('handleChoice sets the currentPic property', () => {
   handleChoice('1', context, next)
-  expect(context.currentPic).toBe(1)
+  expect(context.currentPic).toBe('1')
 })
 
 test('reset returns a new object', () => {
