@@ -1,19 +1,30 @@
-const { showListItem } = require('../')
+const { isEmpty } = require('../')
 
 beforeAll(() => {
   // Spy on console.log to test its output:
   global.console = { log: jest.fn() }
 })
 
-test('Tests are configured correctly.', () => expect(true).toBe(true))
+test('isEmpty returns true for an empty object', () => {
+  const expected = true
+  const actual = isEmpty({})
+  expect(actual).toBe(expected)
+})
 
-test('showListItem shows a list item', () => {
-  // What I expect to see
-  const expected = ' - wombat.txt'
+test('isEmpty returns false for an object with properties', () => {
+  const expected = false
+  const actual = isEmpty({ files: { 0: 'wombat.txt' }, currentFile: 0 })
+  expect(actual).toBe(expected)
+})
 
-  // What actually happens
-  showListItem('wombat.txt')
+test('isEmpty returns true if only the `io` property is present', () => {
+  const expected = true
+  const actual = isEmpty({ io: {} })
+  expect(actual).toBe(expected)
+})
 
-  // Evaluate: do they match?
-  expect(console.log).toHaveBeenCalledWith(expected)
+test('isEmpty returns false if `io` is present with other properties', () => {
+  const expected = false
+  const actual = isEmpty({ io: {}, files: { 0: 'wombat.txt' } })
+  expect(actual).toBe(expected)
 })

@@ -70,3 +70,7 @@ function isEmpty (o) {
   const hasIO = keys.length === 1 && keys[0] === 'io'
   return keys.length === 0 || hasIO
 }
+
+module.exports = {
+  isEmpty
+}
