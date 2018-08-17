@@ -1,10 +1,5 @@
 const { isEmpty } = require('../')
 
-beforeAll(() => {
-  // Spy on console.log to test its output:
-  global.console = { log: jest.fn() }
-})
-
 test('isEmpty returns true for an empty object', () => {
   const expected = true
   const actual = isEmpty({})
