@@ -13,7 +13,7 @@ const input = require('./input')
     files.loadDirectory,
     display.choices,
     input.choose,
-    files.loadFile,
+    files.loadPic,
     files.loadComments,
     display.showFile,
     display.showComments,
@@ -23,13 +23,13 @@ const input = require('./input')
 
   let actionIndex = 0
 
-  function next (ctx) {
-    if (isEmpty(ctx) || actionIndex === actions.length) {
+  function next (context) {
+    if (isEmpty(context) || actionIndex === actions.length) {
       actionIndex = 0
     }
     const action = actions[actionIndex]
     actionIndex++
-    action(ctx, next)
+    action(context, next)
   }
 
   next({})

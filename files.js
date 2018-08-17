@@ -5,10 +5,10 @@ function loadDirectory (context, next) {
     (err, files) => handleFileList(err, files, context, next))
 }
 
-function loadFile (context, next) {
+function loadPic (context, next) {
   const filename = context.files[context.currentPic]
   fs.readFile(`./data/${filename}`,
-    (err, file) => handleFile(err, file, context, next))
+    (err, file) => handlePicFile(err, file, context, next))
 }
 
 function loadComments (context, next) {
@@ -29,7 +29,7 @@ function handleCommentFile (err, file, context, next) {
   next(context)
 }
 
-function handleFile (err, file, context, next) {
+function handlePicFile (err, file, context, next) {
   if (err) {
     throw Error('Sorry, could not load your file.')
   }
@@ -75,11 +75,11 @@ function textFilesOnly (filename) {
 
 module.exports = {
   handleCommentFile,
-  handleFile,
+  handlePicFile,
   handleFileList,
   loadComments,
   loadDirectory,
-  loadFile,
+  loadPic,
   saveComment,
   simpleHashMap,
   textFilesOnly
