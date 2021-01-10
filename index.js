@@ -8,8 +8,9 @@ menu()
 
 function menu() {
   for (let i = 1; i < fileList.length; i++) {
-    console.log("\t" + i + ": " + fileList[i]);
+    console.log("\t" + i + ": " + fileList[i])
   }
+  console.log("\tc = add commment \n\tv = view comment \n\tq = quit")
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -47,7 +48,7 @@ function writeComment () { //your comment sucks
   });
   rl.question("Please enter your comment here:  ", (answer) => {
     rl.close()
-    fs.writeFile('./data/comments.txt', answer, (err, data) => {
+    fs.appendFile('./data/comments.txt', answer + "\n", (err, data) => {
       if(err){
         console.log("Error!: " + err)
       }
