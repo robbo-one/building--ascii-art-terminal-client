@@ -7,7 +7,7 @@ const fileList = fs.readdirSync("./data", "utf-8");
 menu()
 
 function menu() {
-  for (let i = 0; i < fileList.length; i++) {
+  for (let i = 1; i < fileList.length; i++) {
     console.log("\t" + i + ": " + fileList[i]);
   }
   const rl = readline.createInterface({
@@ -18,8 +18,10 @@ function menu() {
     rl.close();
     if (answer === 'q') {
       process.exit()
-    } else if (answer === 'c'){
+    } else if (answer === 'c') {
       writeComment()
+    } else if (answer === 'v') {
+      viewComments()
     } else {
       loadFile(answer);
     }
@@ -35,11 +37,10 @@ function loadFile(input) {
       console.log(data);
     }
     menu()
-  });
+  })
 }
 
 function writeComment () { //your comment sucks
-  console.log("yay")
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -53,6 +54,17 @@ function writeComment () { //your comment sucks
       console.log("Your very 'valuable' comment has been saved.")
       menu()
     } )
+  })
+}
+
+function viewComments() {
+  fs.readFile('./data/comments.txt', "utf-8", (err, data) => {
+    if(err) {
+      console.log('no comments for you!', err)
+    } else {
+      console.log(data)
+      menu()
+    }
   })
 }
 // let isValid = false
