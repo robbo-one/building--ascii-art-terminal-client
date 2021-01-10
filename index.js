@@ -16,6 +16,9 @@ function menu() {
   });
   rl.question("What file do you want to view? ", (answer) => {
     rl.close();
+    if (answer === 'q') {
+      process.exit()
+    }
     loadFile(answer);
   });
 }
