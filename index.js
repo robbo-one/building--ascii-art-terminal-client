@@ -1,34 +1,35 @@
 const fs = require("fs");
 const readline = require("readline");
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
 
-// input = ''
+
 console.log("Hi, welcome to ASCII artworks! :) ");
-
 const fileList = fs.readdirSync("./data", "utf-8");
+menu()
 
-for (let i = 0; i < fileList.length; i++) {
-  console.log("\t" + i + ": " + fileList[i]);
+function menu() {
+  for (let i = 0; i < fileList.length; i++) {
+    console.log("\t" + i + ": " + fileList[i]);
+  }
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  rl.question("What file do you want to view? ", (answer) => {
+    rl.close();
+    loadFile(answer);
+  });
 }
 
-rl.question("What file do you want to view? ", (answer) => {
-  rl.close()
-  loadFile(answer)
-  
-})
-
-function loadFile (input) {
-  let filePath = './data/' + fileList[input]
-  fs.readFile(filePath, 'utf-8', (err, data) => {
+function loadFile(input) {
+  let filePath = "./data/" + fileList[input];
+  fs.readFile(filePath, "utf-8", (err, data) => {
     if (err) {
-      console.log("Error!" + err)
+      console.log("Error!" + err);
     } else {
-      console.log(data)
+      console.log(data);
     }
-  })
+    menu()
+  });
 }
 
 // let isValid = false
@@ -36,10 +37,9 @@ function loadFile (input) {
 //   if (input > 0 && input < 5) {
 //     isValid = true
 //   } else {
-//     console.log("try") 
+//     console.log("try")
 //   }
-// } 
-
+// }
 
 // console.log(input)
 
