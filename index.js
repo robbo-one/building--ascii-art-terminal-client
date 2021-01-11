@@ -90,7 +90,7 @@ function getMenuAgain () {
 //If the user wants to leave a comment they can write it into the terminal and 
 //it will be sent to comments.txt
 function comment(data){
-  fs.writeFile('./comments/comments.txt', data, 'utf8', (err) => {
+  fs.appendFile('./comments/comments.txt', data + "\n", 'utf8', (err) => {
     if (err){
       console.log("OH no it didn't work", err)
     } else {
@@ -99,9 +99,17 @@ function comment(data){
   })
 }
 
+// function saveComments () {
+//   fs.appendFile('./comments/comments.txt', (err) => {
+//     if(err) {
+//       console.log('this no good very bad stinky', err)
+//     } 
+//   })
+// }
+
 function openComments(input){
   const data = comment(input)
-  fs.readFile('./comments/comments.txt', data, 'utf8', (err, fileContents) => {
+  fs.readFile('./comments/comments.txt', data, (err, fileContents) => {
     if (err){
       console.log('Yeah nah aye', err)
     } else {
