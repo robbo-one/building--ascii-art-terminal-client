@@ -26,10 +26,14 @@ function getNumber () {
     output: process.stdout
   })
 
-  rl.question('Which picture do you want to see? Pick a number.', function (input) {
+  rl.question('Which picture do you want to see? Pick a number.\n', function (input) {
     rl.close()
     // Call any functions you like here. For example:
-   printArt(input)
+   if(input != 'q'){
+    printArt(input)
+   } else {
+    process.exit(1)
+   }
   })
 }
 
@@ -67,12 +71,27 @@ function getMenuAgain () {
     input: process.stdin,
     output: process.stdout
   })
-  rl.question('Press enter to see the menu again ', function (input) {
+  rl.question('Press enter to see the menu again, or q to quit ', function (input) {
     rl.close()
     if(input == '') {
       replay()
+    } if(input == 'q'){
+      process.exit(1)
     }
 })
+}
+
+//If the user wants to leave a comment they can write it into the terminal and 
+//it will be sent to comments.txt
+function comment(){
+  const data = ''
+  fs.writeFile('./data/comments.txt', data, 'utf8', (err, fileContents) => {
+    if (err){
+      console.log("OH no it didn't work")
+    } else {
+      console.log(fileContents)
+    }
+  })
 }
 
 
@@ -92,5 +111,8 @@ getNumber()
 //Starts the cycle
 startCycle()
 
+
+//comment stuff
+comment()
 
 
