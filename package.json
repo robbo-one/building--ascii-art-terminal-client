@@ -1,0 +1,26 @@
+{
+  "name": "ascii-art-reader",
+  "version": "1.0.0",
+  "description": "Build a state of the (ASCII) art terminal client. Don't forget to maximise your terminal window on one screen. You'll need the space!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node go.js",
+    "test": "jest --watch "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kahu-2021/ascii-art-reader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kahu-2021/ascii-art-reader/issues"
+  },
+  "homepage": "https://github.com/kahu-2021/ascii-art-reader#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}
