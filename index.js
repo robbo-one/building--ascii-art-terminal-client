@@ -26,11 +26,11 @@ function mainMenu () {
  
 }
 
-function artLoop () {
-for (i = 0; i < artValues.length; i++) {
-  return[i]
-  }
-}
+// function artLoop () {
+// for (i = 0; i < artValues.length; i++) {
+//   return[i]
+//   }
+// }
 
 // user enters desired number of Artwork, function loads that specific artwork
 
@@ -74,14 +74,20 @@ function menuInput () {
   input: process.stdin,
   output: process.stdout
 })
-  
-    rl.question('Type \'Menu\' to return to Menu >', function (start) {
+    rl.question('Type \'Menu\' to return to Menu\n or \'q\' to quit >', function (start) {
       rl.close()
       if (start === 'menu') { 
       //Call any functions you like here. For example:
       }
       mainMenu()
+      exit()
       input()
     })
     }
- 
+
+    function exit (keypress) {
+    const q = process.exitCode
+     // if (keypress === q) {
+        process.exit(q)
+      }
+    
