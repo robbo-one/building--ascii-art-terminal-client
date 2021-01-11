@@ -1,6 +1,7 @@
 
 const fs = require('fs')
 
+
 function welcome () {
   console.log('Welcome!')
 }
@@ -71,17 +72,17 @@ function getMenuAgain () {
     input: process.stdin,
     output: process.stdout
   })
-  rl.question('Press enter to see the menu again, or q to quit or if you dont like these pictures leave a comment\n', function (input) {
+  rl.question('Press enter to see the menu again, q to quit, leave a comment, v to open comments, or d to delete comments\n', function (input) {
     rl.close()
     if(input == '') {
       replay()
     } if(input == 'q'){
       process.exit(1)
-      
     } if(input == 'v'){
       openComments()
-    }
-    else {
+    } if (input == 'd'){
+      deleteComments()
+    } else {
       comment(input)
     }
 })
@@ -118,6 +119,25 @@ function openComments(input){
   }) 
 }
 
+function deleteComments(){
+  //***THIS SHOULD WORK DANG IT
+  // fs.rm('./comments/comments.txt', (err) => {
+  //   if (err) {
+  //     console.log("Na g", err)
+  //   }}
+  // )
+  
+  fs.writeFile('./comments/comments.txt', " ", 'utf8', (err) => {
+    if (err){
+      console.log("OH no it didn't work", err)
+    } else {
+      getMenuAgain()
+    }
+  })
+
+}
+
+
 const readline = require('readline')
 
 //Keeps cycle going in loop
@@ -133,9 +153,6 @@ getNumber()
 } 
 //Starts the cycle
 startCycle()
-
-
-//comment stuff
 
 
 
