@@ -1,13 +1,10 @@
 
-
 const fs = require('fs')
 
 function welcome () {
   console.log('Welcome!')
 }
 welcome()
-
-
 
 //************Print List of Art
 function listArt(){
@@ -18,13 +15,12 @@ fs.readdir ('./data', 'utf8', (err,fileContents) => {
     for(i = 0; i < fileContents.length; i++){
       console.log(i + " " + fileContents[i])
     }
-
   }
 })
 }
 
 //***********Accept user input
-function pressEnter () {
+function getNumber () {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -37,7 +33,6 @@ function pressEnter () {
   })
 }
 
-
 //************* Show Art
 function printArt(input){
 const artFile = pickANumber(input)
@@ -46,6 +41,7 @@ fs.readFile(artFile, 'utf8', (err,fileContents) => {
     console.log('something went wrong', err)
   } else {
     console.log(fileContents)
+    getMenuAgain()
   }
 })}
 
@@ -65,11 +61,36 @@ function pickANumber (num) {
   } 
 }
 
+//Uses enter key to call menu back after looping to choose aother image
+function getMenuAgain () {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+  rl.question('Press enter to see the menu again ', function (input) {
+    rl.close()
+    if(input == '') {
+      replay()
+    }
+})
+}
+
+
 const readline = require('readline')
 
+//Keeps cycle going in loop
+function replay(){
+  listArt()
+  getNumber() 
+}
 
-pressEnter()
+//declares cycle start function
+function startCycle(){
 listArt()
-//printArt()
+getNumber()
+} 
+//Starts the cycle
+startCycle()
+
 
 
