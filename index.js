@@ -151,6 +151,7 @@ function startCycle(){
 listArt()
 getNumber()
 } 
+
 //Starts the cycle
 startCycle()
 
