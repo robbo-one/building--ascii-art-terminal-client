@@ -71,29 +71,44 @@ function getMenuAgain () {
     input: process.stdin,
     output: process.stdout
   })
-  rl.question('Press enter to see the menu again, or q to quit ', function (input) {
+  rl.question('Press enter to see the menu again, or q to quit or if you dont like these pictures leave a comment\n', function (input) {
     rl.close()
     if(input == '') {
       replay()
     } if(input == 'q'){
       process.exit(1)
+      
+    } if(input == 'v'){
+      openComments()
+    }
+    else {
+      comment(input)
     }
 })
 }
 
 //If the user wants to leave a comment they can write it into the terminal and 
 //it will be sent to comments.txt
-function comment(){
-  const data = ''
-  fs.writeFile('./data/comments.txt', data, 'utf8', (err, fileContents) => {
+function comment(data){
+  fs.writeFile('./comments/comments.txt', data, 'utf8', (err) => {
     if (err){
-      console.log("OH no it didn't work")
+      console.log("OH no it didn't work", err)
     } else {
-      console.log(fileContents)
+      getMenuAgain()
     }
   })
 }
 
+function openComments(input){
+  const data = comment(input)
+  fs.readFile('./comments/comments.txt', data, 'utf8', (err, fileContents) => {
+    if (err){
+      console.log('Yeah nah aye', err)
+    } else {
+      console.log(fileContents)
+    }
+  }) 
+}
 
 const readline = require('readline')
 
@@ -113,6 +128,6 @@ startCycle()
 
 
 //comment stuff
-comment()
+
 
 
