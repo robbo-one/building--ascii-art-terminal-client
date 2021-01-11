@@ -56,15 +56,14 @@ const rl = readline.createInterface({
      input: process.stdin,
     output: process.stdout
   })
-
   rl.question('Type number to load Artwork & press ENTER?', function (input) {
     rl.close()
-    console.log(input) 
+    console.log(input)    
     //Call any functions you like here. For example:
-    loadArt(input)
-    
+    loadArt(input)    
   })
-  }
+}
+   //Call any functions you like here. For example:
 input()
 
 
@@ -77,17 +76,11 @@ function menuInput () {
     rl.question('Type \'Menu\' to return to Menu\n or \'q\' to quit >', function (start) {
       rl.close()
       if (start === 'menu') { 
-      //Call any functions you like here. For example:
+     mainMenu()
+     input()
       }
-      mainMenu()
-      exit()
-      input()
-    })
+      else if 
+      (input === 'q') 
+       process.exit()
+      })
     }
-
-    function exit (keypress) {
-    const q = process.exitCode
-     // if (keypress === q) {
-        process.exit(q)
-      }
-    
