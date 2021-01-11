@@ -51,20 +51,44 @@ function getArt(input) {
                 console.log(data);
             });
         }
+        else if (input == "v") {
+            fs.readFile('./data/comments.txt', 'utf8', (err, fileContents) => {
+                console.log(fileContents)
+            })
+        }
+        else if (input == "d") {
+            const rl = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            })
+            rl.question('Are you sure you want to delete comments? (y = yes, any key = no) ', function (input) {
+
+                if (input == "y") {
+                    rl.close()
+                    // Call any functions you like here.
+                    fs.writeFile('data/comments.txt', "", 'utf8', (err) => {
+                        if (err) throw err;
+                    });
+                }
+                else {
+                    rl.close()
+                }
+            })
+        }
     })
 }
 
 
 function readThisFile(filename, callback) {
-  fs.readFile('./tests/' + filename, 'utf8', (err, data) => {
-    if(err) {
-      console.log('An error!', err)
-    } else {
-        callback(data)
-    }
-  })
+    fs.readFile('./tests/' + filename, 'utf8', (err, data) => {
+        if (err) {
+            console.log('An error!', err)
+        } else {
+            callback(data)
+        }
+    })
 }
 
 module.exports = {
     readThisFile: readThisFile,
-  }
+}
