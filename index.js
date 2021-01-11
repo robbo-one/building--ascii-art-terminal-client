@@ -1,20 +1,19 @@
-
 const fs = require('fs')
 
 
 function welcome () {
-  console.log('Welcome!')
+  console.log('\nWelcome! \n')
 }
 welcome()
 
-//************Print List of Art
-function listArt(){
+//************Create List of Art
+function createArtList(){
 fs.readdir ('./data', 'utf8', (err,fileContents) => {
   if (err) {
     console.log("something went wrong",err)
   } else {
     for(i = 0; i < fileContents.length; i++){
-      console.log(i + " " + fileContents[i])
+      console.log(i+1 + ": " + fileContents[i])
     }
   }
 })
@@ -26,15 +25,11 @@ function getNumber () {
     input: process.stdin,
     output: process.stdout
   })
-
-  rl.question('Which picture do you want to see? Pick a number.\n', function (input) {
+  rl.question("Pick a number to show the artwork, or: \n\n   'c' to comment\n   'e' to erase comments\n   'v' to view comments\n   'q' to quit\n\n" , function (input) {
     rl.close()
     // Call any functions you like here. For example:
-   if(input != 'q'){
     printArt(input)
-   } else {
-    process.exit(1)
-   }
+
   })
 }
 
@@ -46,56 +41,67 @@ fs.readFile(artFile, 'utf8', (err,fileContents) => {
     console.log('something went wrong', err)
   } else {
     console.log(fileContents)
-    getMenuAgain()
+    pressEnter()
   }
 })}
 
-
 //********** Return selcted image
 function pickANumber (num) {
-  if (num == 0) {
+  if (num == 1) {
     return 'data/kea.txt'
-  } if (num == 1) {
-    return 'data/kiwi.txt'
   } if (num == 2) {
-    return 'data/manaia.txt'
+    return 'data/kiwi.txt'
   } if (num == 3) {
-    return 'data/nikau.txt'
+    return 'data/manaia.txt'
   } if (num == 4) {
+    return 'data/nikau.txt'
+  } if (num == 5) {
     return 'data/pohutukawa.txt'
   } 
 }
 
 //Uses enter key to call menu back after looping to choose aother image
-function getMenuAgain () {
+function pressEnter () {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   })
-  rl.question('Press enter to see the menu again, q to quit, leave a comment, v to open comments, or d to delete comments\n', function (input) {
+  rl.question('\nPress Enter to start again\n', function (input) {
     rl.close()
     if(input == '') {
       replay()
-    } if(input == 'q'){
-      process.exit(1)
-    } if(input == 'v'){
-      openComments()
-    } if (input == 'd'){
-      deleteComments()
-    } else {
-      comment(input)
     }
-})
+  })
 }
+
+function userInput () {
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      })
+      rl.question('', function (input) {
+        rl.close()
+        } else if(input == 'q'){
+          process.exit(1)
+        } else if(input == 'v'){
+          openComments()
+        } else if (input == 'd'){
+          deleteComments()
+        } else if(input == 'c'){
+          console.log("Add your comment\n")
+        }
+      }
+      )} 
+
 
 //If the user wants to leave a comment they can write it into the terminal and 
 //it will be sent to comments.txt
 function comment(data){
-  fs.appendFile('./comments/comments.txt', data + "\n", 'utf8', (err) => {
+  fs.appendFile('./comments/comments.txt', data, 'utf8', (err) => {
     if (err){
       console.log("OH no it didn't work", err)
     } else {
-      getMenuAgain()
+      replay()
     }
   })
 }
@@ -131,7 +137,7 @@ function deleteComments(){
     if (err){
       console.log("OH no it didn't work", err)
     } else {
-      getMenuAgain()
+      pressEnter()
     }
   })
 
@@ -142,13 +148,13 @@ const readline = require('readline')
 
 //Keeps cycle going in loop
 function replay(){
-  listArt()
+  createArtList()
   getNumber() 
 }
 
 //declares cycle start function
 function startCycle(){
-listArt()
+createArtList()
 getNumber()
 } 
 
