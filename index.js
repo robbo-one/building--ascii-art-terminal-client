@@ -4,8 +4,14 @@ const readline = require('readline')
 console.log("Hi! Welcome to our Art Space!")
 
 let artMenu = ["kea.txt", "kiwi.txt", "manaia.txt", "nikau.txt", "pohutukawa.txt"]
-
-console.log(artMenu)
+let realMenu = {
+  'kea 1': artMenu[0],
+  'Kiwi 2': artMenu[1],
+  'Manaia 3': artMenu[2],
+  'Nikau 4': artMenu[3],
+  'Pohutukawa 5': artMenu[4]
+}
+console.log(realMenu)
 
 let artValues = {
 1: artMenu[0],
@@ -13,6 +19,11 @@ let artValues = {
 3: artMenu[2],
 4: artMenu[3],
 5: artMenu[4],
+}
+
+function mainMenu () {
+  console.log(realMenu)
+ 
 }
 
 function artLoop () {
@@ -28,22 +39,12 @@ fs.readFile('./data/' + artValues[input], 'utf8', (err, fileContents) => {
   if (err) {
     console.log('oopsies', err)
   } else {
-    console.log('here is the bird of your choice.')
+    console.log('here is the art of your choice.')
     console.log('contents!', fileContents)
+    menuInput()
   }
 })
 }
-
-/*
-fs.readdir('./data', 'utf8', (err, dirContents) => {
-  if (err) {
-    console.log('oppsies', err)
-  } else {
-  console.log('Choose from one of these:', dirContents)
-  }
-
-})*/
-
 
 //User input needs to happen here
 
@@ -56,7 +57,7 @@ const rl = readline.createInterface({
     output: process.stdout
   })
 
-  rl.question('Which artwork would you like?', function (input) {
+  rl.question('Type number to load Artwork & press ENTER?', function (input) {
     rl.close()
     console.log(input) 
     //Call any functions you like here. For example:
@@ -65,3 +66,22 @@ const rl = readline.createInterface({
   })
   }
 input()
+
+
+
+function menuInput () {
+  const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+  
+    rl.question('Type \'Menu\' to return to Menu >', function (start) {
+      rl.close()
+      if (start === 'menu') { 
+      //Call any functions you like here. For example:
+      }
+      mainMenu()
+      input()
+    })
+    }
+ 
