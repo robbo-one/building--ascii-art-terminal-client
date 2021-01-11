@@ -1,8 +1,8 @@
 function welcomeMessage(user) {
-    console.log("Welcome " + user)
+    return "Welcome " + user
 }
 
-welcomeMessage("Henry")
+console.log(welcomeMessage("Poncho"))
 const fs = require("fs")
 
 fs.readdir('data', 'utf8', (err, fileContents) => {
@@ -37,8 +37,8 @@ function pressEnter() {
     })
 }
 
-pressEnter()
 
+pressEnter()
 
 function getArt(input) {
 
@@ -106,5 +106,6 @@ function readThisFile(filename, callback) {
 
 module.exports = {
     readThisFile: readThisFile,
-    welcomeMessage: welcomeMessage
+    welcomeMessage: welcomeMessage,
+    pressEnter : pressEnter
 }
