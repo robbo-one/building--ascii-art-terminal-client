@@ -3,6 +3,7 @@ function welcomeMessage(user) {
 }
 
 welcomeMessage("Henry")
+const { MODULESPECIFIER_TYPES } = require("@babel/types")
 const fs = require("fs")
 
 fs.readdir('data', 'utf8', (err, fileContents) => {
@@ -11,7 +12,6 @@ fs.readdir('data', 'utf8', (err, fileContents) => {
         console.log(val, i)
     })
 })
-
 
 // const readline = require('readline')
 const readline = require('readline')
@@ -30,7 +30,6 @@ function pressEnter() {
 }
 
 pressEnter()
-
 
 
 function getArt(input) {
@@ -54,3 +53,18 @@ function getArt(input) {
         }
     })
 }
+
+
+function readThisFile(filename, callback) {
+  fs.readFile('./tests/' + filename, 'utf8', (err, data) => {
+    if(err) {
+      console.log('An error!', err)
+    } else {
+        callback(data)
+    }
+  })
+}
+
+module.exports = {
+    readThisFile: readThisFile,
+  }

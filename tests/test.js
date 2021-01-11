@@ -1,18 +1,17 @@
-const { expect } = require('@jest/globals')
+const { readThisFile } = require('../index')
 
-const func = require('../index.js')
+test('check it reads the file', (done) => {
+  // Arrange
+  const file = 'test.txt'
+  const expected = 'Cat'
 
+  // Act
+  readThisFile(file, (data) => {
+    const actual = data
 
-test('It works', () => {
+    // Assert
+    expect(actual).toEqual(expected)
 
-const file = "test.txt"
-
-const expected = "Hello"
-
-// readThisFile(file (data) => {
-//     const actual = data
-
-//     expect(actual).toEqual(expected)
-//     done()
+    done()
+  })
 })
-
