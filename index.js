@@ -5,14 +5,9 @@ function welcomeMessage(user) {
 console.log(welcomeMessage("Poncho"))
 const fs = require("fs")
 
-fs.readdir('data', 'utf8', (err, fileContents) => {
 
-    fileContents.map((val, i) => {
-        console.log(val, i)
-    })
-})
 
-function repeat() {
+function dataMap() {
     fs.readdir('data', 'utf8', (err, fileContents) => {
 
         fileContents.map((val, i) => {
@@ -20,6 +15,7 @@ function repeat() {
         })
     })
 }
+dataMap()
 
 // const readline = require('readline')
 const readline = require('readline')
@@ -40,14 +36,14 @@ function pressEnter() {
 
 pressEnter()
 
-function getArt(input) {
+function getArt(input, comment) {
 
     fs.readdir('data', 'utf8', (err, fileContents) => {
 
         if (input <= fileContents.length) {
             fs.readFile('./data/' + fileContents[input], 'utf8', (err, fileContents) => {
                 console.log(fileContents)
-                repeat()
+                dataMap()
                 pressEnter()
             })
         }
@@ -55,11 +51,24 @@ function getArt(input) {
             process.exit()
         }
         else if (input == "c") {
-            const data = " and I am happy"
-            fs.appendFile('data/comments.txt', data, 'utf8', (err) => {
-                if (err) throw err;
-                console.log(data);
-            });
+
+            const rl = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            })
+
+            rl.question('Write a comment ', function (input) {
+                rl.close()
+                // Call any functions you like here.
+
+                const comment = " " + input
+                fs.appendFile('data/comments.txt', comment, 'utf8', (err) => {
+                    if (err) throw err;
+                    console.log(comment);
+                });
+            })
+
+
         }
         else if (input == "v") {
             fs.readFile('./data/comments.txt', 'utf8', (err, fileContents) => {
@@ -87,7 +96,7 @@ function getArt(input) {
         }
         else {
             console.log("No artwork found, please try again")
-            repeat()
+            dataMap()
             pressEnter()
         }
     })
@@ -107,5 +116,5 @@ function readThisFile(filename, callback) {
 module.exports = {
     readThisFile: readThisFile,
     welcomeMessage: welcomeMessage,
-    pressEnter : pressEnter
+    dataMap: dataMap
 }

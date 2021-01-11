@@ -1,4 +1,4 @@
-const { readThisFile, welcomeMessage } = require('../index')
+const { readThisFile, welcomeMessage, dataMap } = require('../index')
 
 test('check it reads the file', (done) => {
     // Arrange
@@ -39,3 +39,15 @@ test('tests the welcome message', () => {
     expect(actual).toEqual(expected)
 
 })
+
+// test('maps the data from the data file', () => {
+//     // Arrange
+//     const expected = []
+
+//     // Act
+//     const actual = dataMap()
+
+//     // Assert
+//     expect(actual).toEqual(expected)
+
+// })
