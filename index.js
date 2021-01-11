@@ -5,9 +5,10 @@ const readline = require("readline");
 console.log("Hi, welcome to ASCII artworks! :) ");
 const fileList = fs.readdirSync("./data", "utf-8");
 menu()
+// console.log(fileList)
 
 function menu() {
-  for (let i = 1; i < fileList.length; i++) {
+  for (let i = 0; i < fileList.length -1; i++) {
     console.log("\t" + i + ": " + fileList[i])
   }
   console.log("\tc = add commment \n\tv = view comment \n\tq = quit\n\td = delete comments")
@@ -50,7 +51,7 @@ function writeComment () { //your comment sucks
   })
   rl.question("Please enter your comment here:  ", (answer) => {
     rl.close()
-    fs.appendFile('./data/comments.txt', answer + "\n", (err, data) => {
+    fs.appendFile('./data/~comments.txt', answer + "\n", (err, data) => {
       if(err){
         console.log("Error!: " + err)
       }
@@ -61,7 +62,7 @@ function writeComment () { //your comment sucks
 }
 
 function viewComments() {
-  fs.readFile('./data/comments.txt', "utf-8", (err, data) => {
+  fs.readFile('./data/~comments.txt', "utf-8", (err, data) => {
     if(err) {
       console.log('no comments for you!', err)
     } else {
@@ -79,15 +80,19 @@ function deleteComments() {
   rl.question("are you sure you want to delete the comments? (y/n) ", (answer) => {
     rl.close()
     if (answer === 'y') {
-      fs.writeFile('./data/comments.txt', '', (err, data) => {
-        if (err) {
-          console.log('no delete for you ' + err)
-        } else {
-          console.log('comments have been deleted')
-          menu()
-        }
-      })
+      clearFile()
     } else {
+      menu()
+    }
+  })
+}
+
+function clearFile() {
+  fs.writeFile('./data/~comments.txt', '', (err, data) => {
+    if (err) {
+      console.log('no delete for you ' + err)
+    } else {
+      console.log('comments have been deleted')
       menu()
     }
   })
