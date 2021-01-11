@@ -26,8 +26,7 @@ console.log(realMenu) //2=Displays realMenu with numbers/txt file accessed from 
  //Call any functions you like here. For example:
  input() //3=calls input function
 
- 
-//FUNCTIONS
+ //FUNCTIONS
 function input () { //4=input asks for input.User asked for number
   const rl = readline.createInterface({
     input: process.stdin,
@@ -63,7 +62,7 @@ function menuInput () {//7=user asked for 'menu' or 'q'
       mainMenu() //8a=mainMenu called and realMenu displayed. User selects number.
       input() //10=input called. loops back to Line 31.
     } else if 
-      (input === 'q') 
+      (input === 'q') //user types q
       process.exit()//8b=exit from programm
   })
 }
